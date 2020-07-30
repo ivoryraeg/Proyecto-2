@@ -4,14 +4,18 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Auto.png</File>
-    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/meow_cookie.png</File>
-    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/moneda.png</File>
-    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro.png</File>
-    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro2.png</File>
-    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/obstaculo.png</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Auto.png</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/End_menu.spritefont</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Main_menu.spritefont</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/meow_cookie.png</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/moneda.png</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro.png</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro2.png</File>
+    <File>C:/Users/Joako/Downloads/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/obstaculo.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

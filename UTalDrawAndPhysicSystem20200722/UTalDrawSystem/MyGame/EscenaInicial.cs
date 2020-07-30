@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,28 +13,33 @@ using UTalDrawSystem.SistemaGameObject;
 
 namespace UTalDrawSystem.MyGame
 {
-    public class EscenaInicial:Escena
-    {        
+    public class Juego : Escena
+    {
         UTGameObject playerUTG;
         Camara camara;
 
-        Gato auto;
+        Automovil auto;
+        List<Coleccionable> listaMonedas; 
 
         bool click = false;
         bool seeC2;
-        bool spacePressed; 
+        bool spacePressed;
 
         int n_Choques;
         bool collision_on;
         double time = 0;
 
 
-        public EscenaInicial()
+
+
+        public Juego()
         {
             UTGameObjectsManager.Init();
 
-            auto = new Gato("Auto", new Vector2(450, 400), 4, UTGameObject.FF_form.Circulo);
-            
+            listaMonedas = new List<Coleccionable>();
+
+            auto = new Automovil("Auto", new Vector2(450, 400), 4, UTGameObject.FF_form.Circulo);
+
             new UTGameObject("Muro2", new Vector2(300, 400), 1, UTGameObject.FF_form.Rectangulo, true);
             new UTGameObject("Muro2", new Vector2(900, 400), 1, UTGameObject.FF_form.Rectangulo, true);
 
@@ -111,17 +117,20 @@ namespace UTalDrawSystem.MyGame
 
             /*MONEDAS*****************************************************************************************************************/
 
-            new Coleccionable("moneda", new Vector2(740.2859f, 1054.476f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1576.667f, 1302.191f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(2234.863f, 1218.269f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1540.868f, 1087.637f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1547.633f, 820.8824f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1831.249f, 514.5972f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1565.249f, 504.5972f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1633.058f, 241.2628f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1775.82f, -178.2617f), .1f, UTGameObject.FF_form.Circulo);
-            new Coleccionable("moneda", new Vector2(1637.82f, -176.2617f), .1f, UTGameObject.FF_form.Circulo);
 
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(740.2859f, 1054.476f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1576.667f, 1302.191f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(2234.863f, 1218.269f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1540.868f, 1087.637f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1547.633f, 820.8824f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1831.249f, 514.5972f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1565.249f, 504.5972f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1633.058f, 241.2628f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1775.82f, -178.2617f), .1f, UTGameObject.FF_form.Circulo));
+            listaMonedas.Add(new Coleccionable("moneda", new Vector2(1637.82f, -176.2617f), .1f, UTGameObject.FF_form.Circulo));
+
+
+      
             camara = new Camara(new Vector2(0, 0), .5f, 0);
             camara.HacerActiva();
         }
@@ -141,7 +150,7 @@ namespace UTalDrawSystem.MyGame
 
             time = gameTime.TotalGameTime.Seconds;
 
-            camara.pos.X = auto.objetoFisico.pos.X - (Game1.INSTANCE.GraphicsDevice.Viewport.Width) ;
+            camara.pos.X = auto.objetoFisico.pos.X - (Game1.INSTANCE.GraphicsDevice.Viewport.Width);
             camara.pos.Y = auto.objetoFisico.pos.Y - (Game1.INSTANCE.GraphicsDevice.Viewport.Height);
 
             if (auto.objetoFisico.isColliding && !collision_on)
@@ -153,14 +162,22 @@ namespace UTalDrawSystem.MyGame
             {
                 collision_on = false;
 
+
+            }
+            if(auto.puntaje == 1)
+            {
+                Game1.INSTANCE.ChangeScene(Game1.Scene.End);
                 
             }
 
-            Console.WriteLine(time);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            //Console.WriteLine(n_Choques);
+
+            //Console.WriteLine(listaMonedas.LongCount());
+
+            /*if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                new Escena2();
+                new VentanaManager();
             }
             /*
             if(!click && Mouse.GetState().LeftButton == ButtonState.Pressed)

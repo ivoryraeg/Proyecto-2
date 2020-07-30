@@ -9,9 +9,11 @@ using UTalDrawSystem.SistemaGameObject;
 
 namespace UTalDrawSystem.MyGame
 {
-    class Gato : UTGameObject
+    class Automovil : UTGameObject
     {
-        public Gato(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false) : base(imagen, pos, escala, forma, isStatic)
+        public int puntaje = 0;
+
+        public Automovil(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false) : base(imagen, pos, escala, forma, isStatic)
         {
         }
         public override void Update(GameTime gameTime)
@@ -75,14 +77,17 @@ namespace UTalDrawSystem.MyGame
             {
                 Destroy();
             }
-            
+
         }
         public override void OnCollision(UTGameObject other)
         {
-            Coleccionable col = other as Coleccionable;
+            Coleccionable col = other as Coleccionable;            
+
             if (col != null)
             {
                 col.Destroy();
+                puntaje++;
+                Console.WriteLine(puntaje);
             }
         }
     }
