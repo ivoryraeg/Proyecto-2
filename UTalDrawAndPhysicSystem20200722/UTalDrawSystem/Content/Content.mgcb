@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Accion.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Accion.spritefont
+
 #begin Auto.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -25,19 +32,12 @@
 /processorParam:TextureFormat=Color
 /build:Auto.png
 
-#begin End_menu.spritefont
+#begin Instrucciones.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:End_menu.spritefont
-
-#begin Main_menu.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Main_menu.spritefont
+/build:Instrucciones.spritefont
 
 #begin meow_cookie.png
 /importer:TextureImporter
@@ -98,4 +98,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:obstaculo.png
+
+#begin Titulo.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Titulo.spritefont
 

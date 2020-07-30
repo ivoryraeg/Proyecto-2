@@ -21,7 +21,8 @@ namespace UTalDrawSystem
         VentanaManager ventanaFinal;
         VentanaManager ventanaCreditos;
 
-        Juego juego;
+        public int choques { private set; get; }
+        public double tiempo { private set; get; }
 
         public enum Scene { Start, Game, End, Credits };
 
@@ -36,11 +37,20 @@ namespace UTalDrawSystem
             IsMouseVisible = true;
 
         }
-
         public void ChangeScene(Scene newScene)
         {
             ActiveScene = newScene;
 
+        }
+
+        public void getChoques(int n_Choques)
+        {
+            choques = n_Choques;
+        }
+
+        public void getTime(double time)
+        {
+            tiempo = time;
         }
 
         /// <summary>
