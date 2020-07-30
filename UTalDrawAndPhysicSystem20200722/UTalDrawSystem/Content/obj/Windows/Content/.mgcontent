@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Auto.png</File>
+    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/meow_cookie.png</File>
+    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/moneda.png</File>
+    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro.png</File>
+    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro2.png</File>
+    <File>D:/Descargas/UTalDrawPhysicsGameSystem20200722 (1)/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/obstaculo.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
