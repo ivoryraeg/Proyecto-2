@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Descargas/Taller_U2v1.5/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Accion.spritefont</SourceFile>
+  <SourceFile>C:/Users/Joako/Downloads/Taller_U2v1.8/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Accion.spritefont</SourceFile>
   <SourceTime>2020-07-29T21:47:42.5514933-04:00</SourceTime>
-  <DestFile>D:/Descargas/Taller_U2v1.5/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/Accion.xnb</DestFile>
-  <DestTime>2020-07-29T21:47:48.2099033-04:00</DestTime>
+  <DestFile>C:/Users/Joako/Downloads/Taller_U2v1.8/Taller_U2/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/Accion.xnb</DestFile>
+  <DestTime>2020-07-29T23:52:57.5287803-04:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T13:35:54-03:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

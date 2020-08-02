@@ -12,9 +12,12 @@ namespace UTalDrawSystem.MyGame
     class Automovil : UTGameObject
     {
         public int puntaje = 0;
+        Vector2 respawnPos;
 
         public Automovil(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false) : base(imagen, pos, escala, forma, isStatic)
         {
+            respawnPos = pos; 
+        
         }
         public override void Update(GameTime gameTime)
         {
@@ -78,10 +81,15 @@ namespace UTalDrawSystem.MyGame
                 Destroy();
             }
 
+            //Respawn();
+
         }
+
         public override void OnCollision(UTGameObject other)
         {
-            Coleccionable col = other as Coleccionable;            
+            Coleccionable col = other as Coleccionable; 
+            Obstaculos obs = other as Obstaculos;
+
 
             if (col != null)
             {
@@ -90,6 +98,24 @@ namespace UTalDrawSystem.MyGame
 
                 //Console.WriteLine(puntaje);
             }
+
+            if (obs != null)
+            {
+                //objetoFisico.pos = respawnPos;
+            }
+
         }
+        /*public void Respawn()
+        {
+            if( < 1)
+            {
+                respawnPos = objetoFisico.pos;
+
+                Console.WriteLine(respawnPos);
+
+
+            }
+        }*/
+        
     }
 }

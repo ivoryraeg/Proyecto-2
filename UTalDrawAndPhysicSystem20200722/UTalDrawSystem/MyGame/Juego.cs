@@ -18,22 +18,27 @@ namespace UTalDrawSystem.MyGame
     {
         Camara camara;
 
+        SpriteFont timer;
+
         Automovil auto;
         List<Coleccionable> listaMonedas; 
 
-        public int n_Choques;
+        public int n_Choques { private set; get; }
         bool collision_on;
-        public double time;
+        public double time { private set; get; }
 
-        public Juego()
+        public Juego(ContentManager content)
         {
             UTGameObjectsManager.Init();
 
+            timer = content.Load<SpriteFont>("Titulo");
 
 
             listaMonedas = new List<Coleccionable>();
 
             auto = new Automovil("Auto", new Vector2(450, 400), 4, UTGameObject.FF_form.Circulo);
+
+            new Obstaculos("Hoyo", new Vector2(700, 400), 1, UTGameObject.FF_form.Circulo, false);
 
             /*MUROS**********************************************************************************/
 
@@ -153,18 +158,27 @@ namespace UTalDrawSystem.MyGame
             {
                 collision_on = false;
             }
-            if(auto.puntaje == listaMonedas.Count)
+            if(auto.puntaje == 1/*listaMonedas.Count*/)
             {
                 Game1.INSTANCE.ChangeScene(Game1.Scene.End);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            /*if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
                 new Juego();
-            }
+            }*/
 
 
-            Game1.INSTANCE.getChoques(n_Choques);
-            Game1.INSTANCE.getTime(time);
+           
         }
+        public void Draw (SpriteBatch SB)
+        {
+            Vector2 timerPos;
+
+            timerPos = new Vector2(0,0);
+
+            SB.DrawString(timer, "Tiempo transcurrido: " + Math.Round(time,2), timerPos, Color.Black);
+
+        }
+
     }
 }

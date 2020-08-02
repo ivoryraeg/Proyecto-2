@@ -20,10 +20,9 @@ namespace UTalDrawSystem
         VentanaManager ventanaInicio;
         VentanaManager ventanaFinal;
         VentanaManager ventanaCreditos;
+        public Juego ventanaJuego;
 
-        public int choques { private set; get; }
-        public double tiempo { private set; get; }
-
+     
         public enum Scene { Start, Game, End, Credits };
 
         public Scene ActiveScene = Scene.Start;
@@ -41,17 +40,28 @@ namespace UTalDrawSystem
         {
             ActiveScene = newScene;
 
+            if (ActiveScene == Scene.Start)
+            {
+                ventanaInicio = new VentanaManager(Content);
+            }
+            if (ActiveScene == Scene.Game)
+            {
+                ventanaJuego = new Juego(Content);
+            }            
+            if (ActiveScene == Scene.End)
+            {
+                ventanaFinal = new VentanaManager(Content);
+            }
+            if (ActiveScene == Scene.Credits)
+            {
+                ventanaCreditos = new VentanaManager(Content);
+            }
+
+            
+
         }
 
-        public void getChoques(int n_Choques)
-        {
-            choques = n_Choques;
-        }
-
-        public void getTime(double time)
-        {
-            tiempo = time;
-        }
+        
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -78,9 +88,11 @@ namespace UTalDrawSystem
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            
-            
+
+            ventanaInicio = new VentanaManager(Content);
+
+
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -113,20 +125,7 @@ namespace UTalDrawSystem
             Escena.INSTANCIA?.Update(gameTime);
             MotorFisico.Update(gameTime);
             UTGameObjectsManager.Update(gameTime);
-            if (ActiveScene == Scene.Start)
-            {
-                ventanaInicio = new VentanaManager(Content);
-            }
             
-            if (ActiveScene == Scene.End)
-            {
-                ventanaFinal = new VentanaManager(Content);
-            }
-
-            if (ActiveScene == Scene.Credits)
-            {
-                ventanaCreditos = new VentanaManager(Content);
-            }
 
             base.Update(gameTime);
             
@@ -144,9 +143,15 @@ namespace UTalDrawSystem
             Camara.ActiveCamera.Dibujar(spriteBatch);
             if(ActiveScene == Scene.Start)
             {
-                ventanaInicio.Draw(spriteBatch);
+                ventanaInicio.Draw(spriteBatch);                
             }
-            if(ActiveScene == Scene.End)
+            if(ActiveScene == Scene.Game)
+            {
+                ventanaJuego.Draw(spriteBatch);
+                GraphicsDevice.Clear(Color.LightBlue);
+
+            }
+            if (ActiveScene == Scene.End)
             {
                 ventanaFinal.Draw(spriteBatch);
             }
@@ -157,6 +162,8 @@ namespace UTalDrawSystem
             spriteBatch.End();
 
             base.Draw(gameTime);
+
+
         }
     }
 }

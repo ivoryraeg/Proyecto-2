@@ -41,7 +41,7 @@ namespace UTalDrawSystem.MyGame
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     Game1.INSTANCE.ChangeScene(Game1.Scene.Game);
-                    new Juego();
+                    
                 }
             }
             
@@ -99,8 +99,8 @@ namespace UTalDrawSystem.MyGame
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 6f, SB.GraphicsDevice.Viewport.Height / 1.25f);
 
                 SB.DrawString(titulo, "Juego del auto que choca con pelotas, muros y come monedas.\n", tituloPos, Color.Black);
-                SB.DrawString(mensaje, "Numero de Colisiones --> " + Game1.INSTANCE.choques + "\n" +
-                    "Tiempo Total --> " + Math.Round(Game1.INSTANCE.tiempo, 2) + " Segundos\n", mensajePos, Color.Black);
+                SB.DrawString(mensaje, "Numero de Colisiones --> " + Game1.INSTANCE.ventanaJuego.n_Choques + "\n" +
+                    "Tiempo Total --> " + Math.Round(Game1.INSTANCE.ventanaJuego.time, 2) + " Segundos\n", mensajePos, Color.Black);
                 SB.DrawString(accion, "Presiona 'R' para volver a la pantalla incial.\n", accionPos, Color.Black);
 
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 4f, SB.GraphicsDevice.Viewport.Height / 1.15f);
