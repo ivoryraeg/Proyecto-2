@@ -43,9 +43,9 @@
   <ItemGroup>
     <Compile Include="Game1.cs" />
     <Compile Include="MyGame\Coleccionable.cs" />
-    <Compile Include="MyGame\Escena2.cs" />
-    <Compile Include="MyGame\EscenaInicial.cs" />
-    <Compile Include="MyGame\Gato.cs" />
+    <Compile Include="MyGame\VentanaManager.cs" />
+    <Compile Include="MyGame\Juego.cs" />
+    <Compile Include="MyGame\Automovil.cs" />
     <Compile Include="SistemaGameObjects\UTGameObject.cs" />
     <Compile Include="SistemaGameObjects\UTGameObjectsManager.cs" />
     <Compile Include="Program.cs" />

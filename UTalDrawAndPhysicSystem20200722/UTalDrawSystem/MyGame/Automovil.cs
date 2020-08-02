@@ -87,7 +87,8 @@ namespace UTalDrawSystem.MyGame
             {
                 col.Destroy();
                 puntaje++;
-                Console.WriteLine(puntaje);
+
+                //Console.WriteLine(puntaje);
             }
         }
     }

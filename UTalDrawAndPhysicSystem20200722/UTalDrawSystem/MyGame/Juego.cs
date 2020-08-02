@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -15,30 +16,26 @@ namespace UTalDrawSystem.MyGame
 {
     public class Juego : Escena
     {
-        UTGameObject playerUTG;
         Camara camara;
 
         Automovil auto;
         List<Coleccionable> listaMonedas; 
 
-        bool click = false;
-        bool seeC2;
-        bool spacePressed;
-
-        int n_Choques;
+        public int n_Choques;
         bool collision_on;
-        double time = 0;
-
-
-
+        public double time;
 
         public Juego()
         {
             UTGameObjectsManager.Init();
 
+
+
             listaMonedas = new List<Coleccionable>();
 
             auto = new Automovil("Auto", new Vector2(450, 400), 4, UTGameObject.FF_form.Circulo);
+
+            /*MUROS**********************************************************************************/
 
             new UTGameObject("Muro2", new Vector2(300, 400), 1, UTGameObject.FF_form.Rectangulo, true);
             new UTGameObject("Muro2", new Vector2(900, 400), 1, UTGameObject.FF_form.Rectangulo, true);
@@ -129,26 +126,20 @@ namespace UTalDrawSystem.MyGame
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(1775.82f, -178.2617f), .1f, UTGameObject.FF_form.Circulo));
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(1637.82f, -176.2617f), .1f, UTGameObject.FF_form.Circulo));
 
+            time = 0;
+            n_Choques = 0;
 
-      
-            camara = new Camara(new Vector2(0, 0), .5f, 0);
+            camara = new Camara(new Vector2(auto.objetoFisico.pos.X - (Game1.INSTANCE.GraphicsDevice.Viewport.Width), auto.objetoFisico.pos.Y - (Game1.INSTANCE.GraphicsDevice.Viewport.Height)), .5f, 0);
             camara.HacerActiva();
         }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            /*
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                camara.pos += new Vector2((float)gameTime.ElapsedGameTime.TotalSeconds * 100f, 0);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                camara.pos += new Vector2(-(float)gameTime.ElapsedGameTime.TotalSeconds * 100f, 0);
-            }
-            */
 
-            time = gameTime.TotalGameTime.Seconds;
+            if (Game1.INSTANCE.ActiveScene == Game1.Scene.Game)
+            {
+                time += gameTime.ElapsedGameTime.TotalSeconds;
+            }
 
             camara.pos.X = auto.objetoFisico.pos.X - (Game1.INSTANCE.GraphicsDevice.Viewport.Width);
             camara.pos.Y = auto.objetoFisico.pos.Y - (Game1.INSTANCE.GraphicsDevice.Viewport.Height);
@@ -161,38 +152,19 @@ namespace UTalDrawSystem.MyGame
             else if (!auto.objetoFisico.isColliding)
             {
                 collision_on = false;
-
-
             }
-            if(auto.puntaje == 1)
+            if(auto.puntaje == listaMonedas.Count)
             {
                 Game1.INSTANCE.ChangeScene(Game1.Scene.End);
-                
             }
-
-
-            //Console.WriteLine(n_Choques);
-
-            //Console.WriteLine(listaMonedas.LongCount());
-
-            /*if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
-                new VentanaManager();
+                new Juego();
             }
-            /*
-            if(!click && Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                click = true;
 
-                playerUTG = new Coleccionable("moneda", Camara.ActiveCamera.PosMouseEnCamara(), .1f, UTGameObject.FF_form.Circulo);
 
-                //Console.WriteLine("new Coleccionable('moneda', new Vector2 (" + playerUTG.objetoFisico.pos.X + "," + playerUTG.objetoFisico.pos.Y + "), .1f, UTGameObject.FF_form.Circulo);");
-            }
-            if(Mouse.GetState().LeftButton == ButtonState.Released)
-            {
-                click = false;
-            }
-            */
+            Game1.INSTANCE.getChoques(n_Choques);
+            Game1.INSTANCE.getTime(time);
         }
     }
 }
