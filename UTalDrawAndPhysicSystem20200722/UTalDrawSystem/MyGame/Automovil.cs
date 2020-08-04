@@ -17,7 +17,6 @@ namespace UTalDrawSystem.MyGame
         public Automovil(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false) : base(imagen, pos, escala, forma, isStatic)
         {
             respawnPos = pos; 
-        
         }
         public override void Update(GameTime gameTime)
         {
@@ -101,21 +100,21 @@ namespace UTalDrawSystem.MyGame
 
             if (obs != null)
             {
+                objetoFisico.pos = Respawn();
                 //objetoFisico.pos = respawnPos;
             }
 
         }
-        /*public void Respawn()
+
+        public Vector2 Respawn()
         {
-            if( < 1)
-            {
-                respawnPos = objetoFisico.pos;
 
-                Console.WriteLine(respawnPos);
+            respawnPos.X = Game1.INSTANCE.ventanaJuego.camara.pos.X + Game1.INSTANCE.GraphicsDevice.Viewport.Width/2.5f;
+            respawnPos.Y = Game1.INSTANCE.ventanaJuego.camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height;          
+            Console.WriteLine(respawnPos);
 
-
-            }
-        }*/
+            return respawnPos;
+        }
         
     }
 }

@@ -15,17 +15,23 @@ using UTalDrawSystem.SistemaGameObject;
 namespace UTalDrawSystem.MyGame
 {
     public class Juego : Escena
-    {
-        Camara camara;
+    { 
+        public Camara camara { private set; get; }
 
         SpriteFont timer;
 
         Automovil auto;
-        List<Coleccionable> listaMonedas; 
+        List<UTGameObject> listaMuros;
+        List<UTGameObject> listaPelotas;
+        List<Obstaculos> listaAgujeros;
+        List<Coleccionable> listaMonedas;
 
+        Random rnd;
         public int n_Choques { private set; get; }
         bool collision_on;
         public double time { private set; get; }
+        double timeSpawnPelotas;
+        double timeSpawnAgujeros;
 
         public Juego(ContentManager content)
         {
@@ -33,7 +39,9 @@ namespace UTalDrawSystem.MyGame
 
             timer = content.Load<SpriteFont>("Titulo");
 
-
+            listaMuros = new List<UTGameObject>();
+            listaPelotas = new List<UTGameObject>();
+            listaAgujeros = new List<Obstaculos>();
             listaMonedas = new List<Coleccionable>();
 
             auto = new Automovil("Auto", new Vector2(450, 400), 4, UTGameObject.FF_form.Circulo);
@@ -42,6 +50,7 @@ namespace UTalDrawSystem.MyGame
 
             /*MUROS**********************************************************************************/
 
+            /*
             new UTGameObject("Muro2", new Vector2(300, 400), 1, UTGameObject.FF_form.Rectangulo, true);
             new UTGameObject("Muro2", new Vector2(900, 400), 1, UTGameObject.FF_form.Rectangulo, true);
 
@@ -90,9 +99,9 @@ namespace UTalDrawSystem.MyGame
 
             new UTGameObject("Muro", new Vector2(1550, -400), 1, UTGameObject.FF_form.Rectangulo, true);
             new UTGameObject("Muro", new Vector2(1850, -400), 1, UTGameObject.FF_form.Rectangulo, true);
-
+            */
             /*PELOTAS**************************************************************************************************/
-
+            /*
             new UTGameObject("obstaculo", new Vector2(451.0252f, 692.5721f), 0.02f, UTGameObject.FF_form.Circulo, false);
             new UTGameObject("obstaculo", new Vector2(729.0478f, 694.5721f), 0.02f, UTGameObject.FF_form.Circulo, false);
             new UTGameObject("obstaculo", new Vector2(579.0478f, 926.7676f), 0.02f, UTGameObject.FF_form.Circulo, false);
@@ -116,10 +125,10 @@ namespace UTalDrawSystem.MyGame
             new UTGameObject("obstaculo", new Vector2(1543.731f, -64.39938f), 0.02f, UTGameObject.FF_form.Circulo, false);
             new UTGameObject("obstaculo", new Vector2(1615.731f, -256.3994f), 0.02f, UTGameObject.FF_form.Circulo, false);
             new UTGameObject("obstaculo", new Vector2(1801.731f, -2603994f), 0.02f, UTGameObject.FF_form.Circulo, false);
-
+            */
             /*MONEDAS*****************************************************************************************************************/
 
-
+            /*
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(740.2859f, 1054.476f), .1f, UTGameObject.FF_form.Circulo));
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(1576.667f, 1302.191f), .1f, UTGameObject.FF_form.Circulo));
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(2234.863f, 1218.269f), .1f, UTGameObject.FF_form.Circulo));
@@ -130,13 +139,30 @@ namespace UTalDrawSystem.MyGame
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(1633.058f, 241.2628f), .1f, UTGameObject.FF_form.Circulo));
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(1775.82f, -178.2617f), .1f, UTGameObject.FF_form.Circulo));
             listaMonedas.Add(new Coleccionable("moneda", new Vector2(1637.82f, -176.2617f), .1f, UTGameObject.FF_form.Circulo));
+            */
 
+            rnd = new Random();
             time = 0;
+            timeSpawnPelotas = 0;
+            timeSpawnAgujeros = 0;
             n_Choques = 0;
 
-            camara = new Camara(new Vector2(auto.objetoFisico.pos.X - (Game1.INSTANCE.GraphicsDevice.Viewport.Width), auto.objetoFisico.pos.Y - (Game1.INSTANCE.GraphicsDevice.Viewport.Height)), .5f, 0);
+            camara = new Camara(new Vector2(0,0), .5f, 0);
             camara.HacerActiva();
         }
+
+        /*
+        public void Colisiona(UTGameObject objeto_1, UTGameObject objeto_2)
+        {
+            UTGameObject obj1 = objeto_1 as UTGameObject;
+
+
+            if (objeto_2.objetoFisico.Colisiona(objeto_1.objetoFisico))
+            {
+                objeto_1.Destroy();
+            }
+        }
+        */
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -144,10 +170,12 @@ namespace UTalDrawSystem.MyGame
             if (Game1.INSTANCE.ActiveScene == Game1.Scene.Game)
             {
                 time += gameTime.ElapsedGameTime.TotalSeconds;
+                timeSpawnPelotas += gameTime.ElapsedGameTime.TotalSeconds;
+                timeSpawnAgujeros += gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            camara.pos.X = auto.objetoFisico.pos.X - (Game1.INSTANCE.GraphicsDevice.Viewport.Width);
-            camara.pos.Y = auto.objetoFisico.pos.Y - (Game1.INSTANCE.GraphicsDevice.Viewport.Height);
+            camara.pos.X += 12; //auto.objetoFisico.pos.X - (Game1.INSTANCE.GraphicsDevice.Viewport.Width);
+            //camara.pos.Y = //auto.objetoFisico.pos.Y - (Game1.INSTANCE.GraphicsDevice.Viewport.Height);
 
             if (auto.objetoFisico.isColliding && !collision_on)
             {
@@ -167,8 +195,65 @@ namespace UTalDrawSystem.MyGame
                 new Juego();
             }*/
 
+            if (camara.pos.X%300 == 0)
+            {
+                listaMuros.Add(new UTGameObject("Muro", new Vector2(camara.pos.X + 300 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, camara.pos.Y), 1, UTGameObject.FF_form.Rectangulo, true));
+                listaMuros.Add(new UTGameObject("Muro", new Vector2(camara.pos.X + 300 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2), 1, UTGameObject.FF_form.Rectangulo, true));
 
-           
+            }
+
+            if (listaMuros.Count > 0)
+            {
+                if (listaMuros.First<UTGameObject>().objetoFisico.pos.X < camara.pos.X -200)
+                {
+                    listaMuros.First<UTGameObject>().Destroy();
+                    listaMuros.Remove(listaMuros.First<UTGameObject>());
+                }
+            }
+
+            if (timeSpawnAgujeros > 1f)
+            {
+
+                listaAgujeros.Add(new Obstaculos("Hoyo", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 1, UTGameObject.FF_form.Circulo, false));
+
+                timeSpawnAgujeros = 0;
+            }
+            if (listaAgujeros.Count > 0)
+            {
+                if (listaAgujeros.First<Obstaculos>().objetoFisico.pos.X < camara.pos.X - 200)
+                {
+                    listaAgujeros.First<Obstaculos>().Destroy();
+                    listaAgujeros.Remove(listaAgujeros.First<Obstaculos>());
+                }
+            }
+
+            if (timeSpawnPelotas > 0.3f)
+            {
+                listaPelotas.Add(new UTGameObject("obstaculo", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.02f, UTGameObject.FF_form.Circulo, false));
+                //listaPelotas.Add(new UTGameObject("obstaculo", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.02f, UTGameObject.FF_form.Circulo, false));
+                //listaPelotas.Add(new UTGameObject("obstaculo", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.02f, UTGameObject.FF_form.Circulo, false));
+                timeSpawnPelotas = 0;
+            }
+            if (listaPelotas.Count > 0)
+            {
+                if (listaPelotas.First<UTGameObject>().objetoFisico.pos.X < camara.pos.X - 200)
+                {
+                    listaPelotas.First<UTGameObject>().Destroy();
+                    listaPelotas.Remove(listaPelotas.First<UTGameObject>());
+                }
+            }
+
+
+
+            if (auto.objetoFisico.pos.X < camara.pos.X)
+            {
+                auto.objetoFisico.pos = auto.Respawn();
+            }
+            if (auto.objetoFisico.pos.X >= camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width*2)
+            {
+                auto.objetoFisico.pos = new Vector2(camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, auto.objetoFisico.pos.Y);
+            }
+
         }
         public void Draw (SpriteBatch SB)
         {

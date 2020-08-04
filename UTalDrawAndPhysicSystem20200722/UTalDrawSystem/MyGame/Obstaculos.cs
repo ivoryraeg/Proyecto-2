@@ -15,7 +15,7 @@ namespace UTalDrawSystem.MyGame
             objetoFisico.isTrigger = true;
 
 
-            objetoFisico.agregarFFCirculo(1, new Vector2(1,1));
+            objetoFisico.agregarFFCirculo(25f, new Vector2(1,1));
 
         
            
