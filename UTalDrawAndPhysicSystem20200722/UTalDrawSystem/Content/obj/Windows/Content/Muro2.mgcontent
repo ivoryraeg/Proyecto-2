@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Descargas/Proyecto-2-Optimizacion/Proyecto-2-Optimizacion/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro2.png</SourceFile>
-  <SourceTime>2020-08-02T00:00:21-04:00</SourceTime>
-  <DestFile>D:/Descargas/Proyecto-2-Optimizacion/Proyecto-2-Optimizacion/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/Muro2.xnb</DestFile>
-  <DestTime>2020-08-03T20:33:27.5517365-04:00</DestTime>
+  <SourceFile>C:/Users/Joako/Downloads/Proyecto-2-Alpha-SideScroller/Proyecto-2-Alpha-SideScroller/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Muro2.png</SourceFile>
+  <SourceTime>2020-08-03T23:43:30-04:00</SourceTime>
+  <DestFile>C:/Users/Joako/Downloads/Proyecto-2-Alpha-SideScroller/Proyecto-2-Alpha-SideScroller/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/Muro2.xnb</DestFile>
+  <DestTime>2020-08-04T15:55:40.4787829-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T13:35:54-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

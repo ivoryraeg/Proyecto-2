@@ -9,13 +9,16 @@ using UTalDrawSystem.SistemaGameObject;
 
 namespace UTalDrawSystem.MyGame
 {
-    class Automovil : UTGameObject
+    public class Automovil : UTGameObject
     {
+
+        public int vidas;
         public int puntaje = 0;
         Vector2 respawnPos;
 
         public Automovil(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false) : base(imagen, pos, escala, forma, isStatic)
         {
+            vidas = 5;
             respawnPos = pos; 
         }
         public override void Update(GameTime gameTime)
@@ -74,20 +77,19 @@ namespace UTalDrawSystem.MyGame
             }
 
 
+            
+            
 
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                Destroy();
-            }
 
-            //Respawn();
+
+            
 
         }
 
         public override void OnCollision(UTGameObject other)
         {
             Coleccionable col = other as Coleccionable; 
-            Obstaculos obs = other as Obstaculos;
+            Agujero obs = other as Agujero;
 
 
             if (col != null)
@@ -100,16 +102,19 @@ namespace UTalDrawSystem.MyGame
 
             if (obs != null)
             {
+
+                
+
                 objetoFisico.pos = Respawn();
-                //objetoFisico.pos = respawnPos;
+                
             }
 
         }
 
         public Vector2 Respawn()
         {
-
-            respawnPos.X = Game1.INSTANCE.ventanaJuego.camara.pos.X + Game1.INSTANCE.GraphicsDevice.Viewport.Width/2.5f;
+            vidas--;
+            respawnPos.X = Game1.INSTANCE.ventanaJuego.camara.pos.X + Game1.INSTANCE.GraphicsDevice.Viewport.Width/2f;
             respawnPos.Y = Game1.INSTANCE.ventanaJuego.camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height;          
             Console.WriteLine(respawnPos);
 
