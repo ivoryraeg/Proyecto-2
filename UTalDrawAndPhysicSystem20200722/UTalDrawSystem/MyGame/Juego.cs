@@ -38,8 +38,6 @@ namespace UTalDrawSystem.MyGame
         double timeSpawnMoneda;
         int posYMoneda;
         int condicionalSpawnMonedas;
-        
-        
 
         public Juego(ContentManager content)
         {
@@ -49,13 +47,12 @@ namespace UTalDrawSystem.MyGame
             vidasActuales = content.Load<SpriteFont>("Titulo");
             puntajeTotal = content.Load<SpriteFont>("Titulo");
 
-
             listaMuros = new List<UTGameObject>();
             listaPelotas = new List<Pelota>();
             listaAgujeros = new List<Agujero>();
             listaMonedas = new List<Coleccionable>();
 
-            auto = new Automovil("Auto", new Vector2(450, Game1.INSTANCE.GraphicsDevice.Viewport.Height), 4, UTGameObject.FF_form.Rectangulo);
+            auto = new Automovil(content, "Auto", new Vector2(450, Game1.INSTANCE.GraphicsDevice.Viewport.Height), 4, UTGameObject.FF_form.Rectangulo);
 
             rnd = new Random();
             time = 0;
@@ -68,13 +65,7 @@ namespace UTalDrawSystem.MyGame
 
             camara = new Camara(new Vector2(0,0), .5f, 0);
             camara.HacerActiva();
-
-          
-
         }
-
-
-
 
         public override void Update(GameTime gameTime)
         {
@@ -136,7 +127,7 @@ namespace UTalDrawSystem.MyGame
 
             if (timeSpawnPelotas > 0.3f)
             {
-                listaPelotas.Add(new Pelota("obstaculo", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.02f, UTGameObject.FF_form.Circulo, false));
+                listaPelotas.Add(new Pelota("obstaculo", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.02f, UTGameObject.FF_form.Circulo, false, true));
                 timeSpawnPelotas = 0;
             }
             if (listaPelotas.Count > 0)
@@ -175,28 +166,47 @@ namespace UTalDrawSystem.MyGame
                 }
             }
 
-
-
             if (auto.objetoFisico.pos.X < camara.pos.X)
             {
-                auto.objetoFisico.pos = auto.Respawn();
+                if (!auto.invulnerable)
+                {
+                    auto.invulnerable = true;
+                    auto.objetoFisico.pos = auto.Respawn();
+                }
             }
 
-            //Evita que salga por la parte dercha
+            //Evita que salga por la parte derecha
+            if (auto.invulnerable && auto.objetoFisico.pos.X <= camara.pos.X + 30)
+            {
+                auto.objetoFisico.pos = new Vector2(camara.pos.X + 30, auto.objetoFisico.pos.Y);
+            }
+            
+            //Evita que salga por la parte derecha
             if (auto.objetoFisico.pos.X >= camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width*2)
             {
                 auto.objetoFisico.pos = new Vector2(camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, auto.objetoFisico.pos.Y);
             }
 
+            //Evita que el auto salga por la parte superior de la pantalla.
+            if (auto.objetoFisico.pos.Y <= camara.pos.Y + 75)
+            {
+                auto.objetoFisico.pos = new Vector2(auto.objetoFisico.pos.X, camara.pos.Y + 75 );
+            }
+            
+            //Evita que el auto salga por la parte inferior de la pantalla.
+            if (auto.objetoFisico.pos.Y >= camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)
+            {
+                auto.objetoFisico.pos = new Vector2(auto.objetoFisico.pos.X, camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2);
+            }
+
             //Gana vidas cada 25 monedas recogidas (supuestamente)
-            if(auto.puntaje > 0 && auto.puntaje%25 == 0)
+            if (auto.puntaje > 0 && auto.puntaje%25 == 0)
             {
                 if (!ganoVidas)
                 {
                     ganoVidas = true;
                     auto.vidas++;
                 }
-                
             }
 
             else if(ganoVidas)
@@ -224,8 +234,6 @@ namespace UTalDrawSystem.MyGame
             SB.DrawString(timer, "Tiempo: " + Math.Round(time,2), timerPos, Color.Black);
             SB.DrawString(vidasActuales, "Vidas: " + Game1.INSTANCE.ventanaJuego.auto.vidas, vidasPos, Color.Black);
             SB.DrawString(puntajeTotal, "Monedas recogidas: " + Game1.INSTANCE.ventanaJuego.auto.puntaje, puntajePos, Color.Black);
-
-
         }
 
     }

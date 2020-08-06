@@ -15,41 +15,21 @@ namespace UTalDrawSystem.MyGame
             objetoFisico.isTrigger = true;
 
             objetoFisico.agregarFFCirculo(25f, new Vector2(1,1));
-
-        
-                 
-        }
-        public void Colisiona(UTGameObject objeto_1, UTGameObject objeto_2)
-        {
-            UTGameObject obj1 = objeto_1 as UTGameObject;
-
-
-            if (objeto_2.objetoFisico.Colisiona(objeto_1.objetoFisico))
-            {
-                objeto_1.Destroy();
-            }
+  
         }
         public override void OnCollision(UTGameObject other)
         {
             Coleccionable col = other as Coleccionable;
             Pelota ball = other as Pelota;
 
-            
-
             if (col != null)
             {
                 col.Destroy();                
-
-                //Console.WriteLine(puntaje);
             }
-
             if (ball != null )
             {
-               
-                ball.Destroy();
-                //objetoFisico.pos = respawnPos;
+                ball.Destroy();;
             }
-
         }
     }
 }

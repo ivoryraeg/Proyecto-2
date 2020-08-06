@@ -15,7 +15,7 @@ namespace UTalDrawSystem
     public class Game1 : Game
     {
         public GraphicsDeviceManager graphics { private set; get; }
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
 
         VentanaManager ventanaInicio;
         VentanaManager ventanaFinal;
