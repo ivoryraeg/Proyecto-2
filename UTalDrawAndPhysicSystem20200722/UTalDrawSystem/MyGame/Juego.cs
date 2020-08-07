@@ -21,6 +21,9 @@ namespace UTalDrawSystem.MyGame
         SpriteFont timer;
         SpriteFont vidasActuales;
         SpriteFont puntajeTotal;
+        Texture2D timerIcon;
+        Texture2D vidasIcon;
+        Texture2D puntajeIcon;
 
         public Automovil auto;
         List<UTGameObject> listaMuros;
@@ -46,6 +49,10 @@ namespace UTalDrawSystem.MyGame
             timer = content.Load<SpriteFont>("Titulo");
             vidasActuales = content.Load<SpriteFont>("Titulo");
             puntajeTotal = content.Load<SpriteFont>("Titulo");
+
+            timerIcon = content.Load<Texture2D>("timer");
+            vidasIcon = content.Load<Texture2D>("vida");
+            puntajeIcon = content.Load<Texture2D>("moneda");
 
             listaMuros = new List<UTGameObject>();
             listaPelotas = new List<Pelota>();
@@ -227,13 +234,17 @@ namespace UTalDrawSystem.MyGame
             Vector2 vidasPos;
             Vector2 puntajePos;
 
-            timerPos = new Vector2(0,25);
+            timerPos = new Vector2(50, 25);
             vidasPos = new Vector2((Game1.INSTANCE.GraphicsDevice.Viewport.Width) - 100,25);
-            puntajePos = new Vector2(Game1.INSTANCE.GraphicsDevice.Viewport.Width / 2.5f, 25);
+            puntajePos = new Vector2(Game1.INSTANCE.GraphicsDevice.Viewport.Width / 2f, 25);
 
-            SB.DrawString(timer, "Tiempo: " + Math.Round(time,2), timerPos, Color.Black);
-            SB.DrawString(vidasActuales, "Vidas: " + Game1.INSTANCE.ventanaJuego.auto.vidas, vidasPos, Color.Black);
-            SB.DrawString(puntajeTotal, "Monedas recogidas: " + Game1.INSTANCE.ventanaJuego.auto.puntaje, puntajePos, Color.Black);
+            SB.Draw(timerIcon, timerPos, null, Color.White, 0f, new Vector2(0, 0), new Vector2(0.05f,0.05f), SpriteEffects.None, 1f);
+            SB.Draw(vidasIcon, vidasPos, null, Color.White, 0f, new Vector2(0, 0), new Vector2(0.05f, 0.05f), SpriteEffects.None, 1f);
+            SB.Draw(puntajeIcon, puntajePos, null, Color.White, 0f, new Vector2(0, 0), new Vector2(0.05f, 0.05f), SpriteEffects.None, 1f);
+
+            SB.DrawString(timer, "    " + Math.Round(time,2), timerPos, Color.Black);
+            SB.DrawString(vidasActuales, "     " + Game1.INSTANCE.ventanaJuego.auto.vidas, vidasPos, Color.Black);
+            SB.DrawString(puntajeTotal, "    " + Game1.INSTANCE.ventanaJuego.auto.puntaje, puntajePos, Color.Black);
         }
 
     }

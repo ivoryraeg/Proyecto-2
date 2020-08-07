@@ -13,7 +13,6 @@ namespace UTalDrawSystem.MyGame
 {
     public class Automovil : UTGameObject
     {
-        Texture2D energyShield;
         UTGameObject shield;
 
         public int vidas;
@@ -26,8 +25,6 @@ namespace UTalDrawSystem.MyGame
 
         public Automovil(ContentManager content, string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false, bool isSuperior = true) : base(imagen, pos, escala, forma, isStatic, isSuperior)
         {
-            energyShield = content.Load<Texture2D>("energyShield");
-
             vidas = 5;
             respawnPos = pos;
 
