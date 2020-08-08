@@ -34,13 +34,15 @@ namespace UTalDrawSystem.MyGame
         Random rnd;
         public int n_Choques { private set; get; }
         bool collision_on;
-        bool ganoVidas;
+        int ganoVidas;
         public double time { private set; get; }
         double timeSpawnPelotas;
         double timeSpawnAgujeros;
         double timeSpawnMoneda;
         int posYMoneda;
         int condicionalSpawnMonedas;
+
+        public int pelotasEncestadas;
 
         public Juego(ContentManager content)
         {
@@ -68,10 +70,14 @@ namespace UTalDrawSystem.MyGame
             timeSpawnMoneda = 0;
             condicionalSpawnMonedas = 0;
             n_Choques = 0;
-            ganoVidas = false;
+            ganoVidas = 25;
+
+            pelotasEncestadas = 0;
 
             camara = new Camara(new Vector2(0,0), .5f, 0);
             camara.HacerActiva();
+
+
         }
 
         public override void Update(GameTime gameTime)
@@ -207,18 +213,10 @@ namespace UTalDrawSystem.MyGame
             }
 
             //Gana vidas cada 25 monedas recogidas (supuestamente)
-            if (auto.puntaje > 0 && auto.puntaje%25 == 0)
+            if (auto.puntaje > ganoVidas)
             {
-                if (!ganoVidas)
-                {
-                    ganoVidas = true;
-                    auto.vidas++;
-                }
-            }
-
-            else if(ganoVidas)
-            {
-                ganoVidas = false;
+                ganoVidas += 25;
+                auto.vidas++;
             }
 
             //Envia a la pantalla final si se acaban las vidas

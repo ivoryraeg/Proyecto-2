@@ -108,6 +108,7 @@ namespace UTalDrawSystem.MyGame
         {
             Coleccionable col = other as Coleccionable; 
             Agujero obs = other as Agujero;
+            Pelota ball = other as Pelota;
 
             if (col != null)
             {
@@ -123,6 +124,10 @@ namespace UTalDrawSystem.MyGame
                     invulnerable = true;
                     objetoFisico.pos = Respawn();
                 }
+            }
+            if (ball != null)
+            {
+                ball.hitByCar = true;
             }
         }
 

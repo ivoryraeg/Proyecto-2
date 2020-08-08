@@ -76,17 +76,14 @@ namespace UTalDrawSystem.MyGame
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 3.8f, SB.GraphicsDevice.Viewport.Height / 1.25f);
 
                 SB.DrawString(titulo, "Juego del auto que choca con cosas, y come monedas\n" +
-                    "       (Descanse en paz el genio creativo detras del nombre.)\n", tituloPos, Color.Black);
-                SB.DrawString(mensaje, " COMO NO TE ENTERASTE TODAVIA! HA LLEGADO EL JUEGO ACLAMADO \n" +
-                    "POR EL MISMISIMO PROFESOR! OSI OSI\n" +
+                    "(Descanse en paz el genio creativo detras del nombre.)\n", tituloPos, Color.Black);
+                SB.DrawString(mensaje,
                     "-> Comienzas el juego con 5 vidas.\n" +
                     "-> Perderas una vida al quedarte atras de la camara o caer en los agujeros del camino.\n" +
                     "-> Cuidado con las pelotas, pues rebotaras al chocar contra ellas.\n" +
                     "-> Cada 25 monedas que consigas obtendras una vida extra.\n" +
-                    "-> El juego ya no tiene glitches, tampoco amor.\n" +
                     "\n" +
                     "-> Movimiento : [W]-[A]-[S]-[D]\n" +
-                    "-> Frenar : [X] (o no presiones nada, es lo mismo).\n" +
                     "-> Diviertete ;D \n", mensajePos, Color.Black);
                 SB.DrawString(accion, "Presiona 'Enter' para comenzar.\n", accionPos, Color.Black);
 
@@ -100,10 +97,12 @@ namespace UTalDrawSystem.MyGame
                 mensajePos = new Vector2(SB.GraphicsDevice.Viewport.Width / 3.4f, SB.GraphicsDevice.Viewport.Height / 2.5f);
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 6f, SB.GraphicsDevice.Viewport.Height / 1.25f);
 
-                SB.DrawString(titulo, "Juego del auto que choca con pelotas, muros y come monedas.\n", tituloPos, Color.Black);
+                SB.DrawString(titulo, "Juego del auto que choca con cosas y come monedas.\n", tituloPos, Color.Black);
                 SB.DrawString(mensaje, "Numero de Colisiones --> " + Game1.INSTANCE.ventanaJuego.n_Choques + "\n" +
+                    "Pelotas encestadas --> " + Game1.INSTANCE.ventanaJuego.pelotasEncestadas + "\n" +
                     "Tiempo Total --> " + Math.Round(Game1.INSTANCE.ventanaJuego.time, 2) + " Segundos\n" +
                     "Monedas recogidas --> " + Game1.INSTANCE.ventanaJuego.auto.puntaje, mensajePos, Color.Black)
+                    
                     ;
                 SB.DrawString(accion, "Presiona 'R' para volver a la pantalla incial.\n", accionPos, Color.Black);
 
@@ -117,7 +116,7 @@ namespace UTalDrawSystem.MyGame
                 mensajePos = new Vector2(SB.GraphicsDevice.Viewport.Width / 5f, SB.GraphicsDevice.Viewport.Height / 3.5f);
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 6f, SB.GraphicsDevice.Viewport.Height / 1.25f);
 
-                SB.DrawString(titulo, "Juego del auto que choca con pelotas, muros y come monedas.\n", tituloPos, Color.Black);
+                SB.DrawString(titulo, "Juego del auto que choca con cosas y come monedas.\n", tituloPos, Color.Black);
                 SB.DrawString(mensaje, "Grupo : 2.\n" +
                     "Integrantes : \n" +
                     "-> Kevin Ignacio Silva Kendall.\n" +

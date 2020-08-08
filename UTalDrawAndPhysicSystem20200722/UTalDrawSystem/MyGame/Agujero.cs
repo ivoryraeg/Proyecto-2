@@ -28,7 +28,14 @@ namespace UTalDrawSystem.MyGame
             }
             if (ball != null )
             {
-                ball.Destroy();;
+                ball.Destroy();
+
+                if(ball.hitByCar)
+                    {
+                    Game1.INSTANCE.ventanaJuego.auto.puntaje += 10;
+                    Game1.INSTANCE.ventanaJuego.pelotasEncestadas++;
+                    ball.hitByCar = false;
+                    }
             }
         }
     }
