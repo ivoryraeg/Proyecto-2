@@ -41,7 +41,7 @@ namespace UTalDrawSystem.MyGame
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     Game1.INSTANCE.ChangeScene(Game1.Scene.Game);
-                    new Juego();
+                    
                 }
             }
             
@@ -75,16 +75,18 @@ namespace UTalDrawSystem.MyGame
                 mensajePos = new Vector2(SB.GraphicsDevice.Viewport.Width / 50, SB.GraphicsDevice.Viewport.Height / 4);
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 3.8f, SB.GraphicsDevice.Viewport.Height / 1.25f);
 
-                SB.DrawString(titulo, "Juego del auto que choca con pelotas, muros y come monedas.\n", tituloPos, Color.Black);
-                SB.DrawString(mensaje, "-> Recoge todas las monedas con la menor cantidad de choques y en el menor tiempo \n" +
-                    "posible.\n" +
-                    "-> Cuidado las fisicas, patinaras como en una pista de hielo y chocar convierte este juego \n" +
-                    "en uno de pinball.\n" +
-                    "-> El juego tiene mas glitchs que codigo, pero esta hecho con amor.\n" +
-                    "->Si por casualidades de la vida sales disparado fuera del mapa cual penal de Higuain, \n" +
-                    "presiona 'R', pero no creo que lo necesites (ironia).\n" +
-                    "\n-> Movimiento : W-A-S-D\n" +
-                    "-> Frenar : X (o no presiones nada, es lo mismo).\n" +
+                SB.DrawString(titulo, "Juego del auto que choca con cosas, y come monedas\n" +
+                    "       (Descanse en paz el genio creativo detras del nombre.)\n", tituloPos, Color.Black);
+                SB.DrawString(mensaje, " COMO NO TE ENTERASTE TODAVIA! HA LLEGADO EL JUEGO ACLAMADO \n" +
+                    "POR EL MISMISIMO PROFESOR! OSI OSI\n" +
+                    "-> Comienzas el juego con 5 vidas.\n" +
+                    "-> Perderas una vida al quedarte atras de la camara o caer en los agujeros del camino.\n" +
+                    "-> Cuidado con las pelotas, pues rebotaras al chocar contra ellas.\n" +
+                    "-> Cada 25 monedas que consigas obtendras una vida extra.\n" +
+                    "-> El juego ya no tiene glitches, tampoco amor.\n" +
+                    "\n" +
+                    "-> Movimiento : [W]-[A]-[S]-[D]\n" +
+                    "-> Frenar : [X] (o no presiones nada, es lo mismo).\n" +
                     "-> Diviertete ;D \n", mensajePos, Color.Black);
                 SB.DrawString(accion, "Presiona 'Enter' para comenzar.\n", accionPos, Color.Black);
 
@@ -99,8 +101,10 @@ namespace UTalDrawSystem.MyGame
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 6f, SB.GraphicsDevice.Viewport.Height / 1.25f);
 
                 SB.DrawString(titulo, "Juego del auto que choca con pelotas, muros y come monedas.\n", tituloPos, Color.Black);
-                SB.DrawString(mensaje, "Numero de Colisiones --> " + Game1.INSTANCE.choques + "\n" +
-                    "Tiempo Total --> " + Math.Round(Game1.INSTANCE.tiempo, 2) + " Segundos\n", mensajePos, Color.Black);
+                SB.DrawString(mensaje, "Numero de Colisiones --> " + Game1.INSTANCE.ventanaJuego.n_Choques + "\n" +
+                    "Tiempo Total --> " + Math.Round(Game1.INSTANCE.ventanaJuego.time, 2) + " Segundos\n" +
+                    "Monedas recogidas --> " + Game1.INSTANCE.ventanaJuego.auto.puntaje, mensajePos, Color.Black)
+                    ;
                 SB.DrawString(accion, "Presiona 'R' para volver a la pantalla incial.\n", accionPos, Color.Black);
 
                 accionPos = new Vector2(SB.GraphicsDevice.Viewport.Width / 4f, SB.GraphicsDevice.Viewport.Height / 1.15f);

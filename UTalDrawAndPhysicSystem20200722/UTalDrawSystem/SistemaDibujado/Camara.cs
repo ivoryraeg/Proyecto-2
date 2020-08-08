@@ -34,6 +34,10 @@ namespace UTalDrawSystem.SistemaDibujado
             {
                 dib.Draw(SB, pos, rot, escala);
             }
+            foreach (Dibujable dib in Escena.INSTANCIA.dibujablesSuperior)
+            {
+                dib.Draw(SB, pos, rot, escala);
+            }
         }
         public bool EsCamaraActiva()
         {

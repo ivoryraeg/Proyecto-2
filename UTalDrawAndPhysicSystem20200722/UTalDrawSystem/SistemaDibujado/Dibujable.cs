@@ -18,12 +18,12 @@ namespace UTalDrawSystem.SistemaDibujado
         public int alto { get { return (int)(this.textura.Height * this.escala); } set { escala = this.textura.Height / value; } }
         public float rot;
 
-        public Dibujable(string texturaNombre, Vector2 pos, float escala)
+        public Dibujable(string texturaNombre, Vector2 pos, float escala, bool isSuperior = false)
         {
             this.pos = pos;
             this.escala = escala;
             this.textura = Game1.INSTANCE.Content.Load<Texture2D>(texturaNombre);
-            Escena.INSTANCIA.agregarDib(this);
+            Escena.INSTANCIA.agregarDib(this, isSuperior);
             this.centro = new Vector2(this.textura.Width / 2, this.textura.Height / 2);
         }
 

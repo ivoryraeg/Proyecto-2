@@ -40,29 +40,29 @@ namespace UTalDrawSystem.SistemaFisico
                         {
                             objetoB.OnCollision(objetoA.GetObject());
                         }
-                        if(objetoA.isTrigger || objetoB.isTrigger)
+                        if (!(objetoA.isTrigger || objetoB.isTrigger))
                         {
-                            return;
-                        }
-                        objetoA.isColliding = objetoB.isColliding = true;
-                        Vector2 direccionBA = (objetoA.pos - objetoB.pos);        
-                        Vector2 VelocityBA = objetoA.vel + objetoB.vel;
-                        //direccionBA.Normalize();
-                        if (objetoA.isStatic)
-                        {                            
-                            objetoB.AplicaFuerza((-direccionBA + -VelocityBA)*15f, (float)gameTime.ElapsedGameTime.TotalSeconds, true);
-                        }
-                        else if(!objetoB.isStatic)
-                        {
-                            objetoA.AplicaFuerza((direccionBA + VelocityBA) * 30f, (float)gameTime.ElapsedGameTime.TotalSeconds);
-                        }
-                        if (objetoB.isStatic)
-                        {
-                            objetoA.AplicaFuerza((direccionBA + -VelocityBA)* 15f, (float)gameTime.ElapsedGameTime.TotalSeconds, true);
-                        }
-                        else if(!objetoA.isStatic)
-                        {
-                            objetoB.AplicaFuerza((-direccionBA + VelocityBA)*30f, (float)gameTime.ElapsedGameTime.TotalSeconds);
+
+                            objetoA.isColliding = objetoB.isColliding = true;
+                            Vector2 direccionBA = (objetoA.pos - objetoB.pos);
+                            Vector2 VelocityBA = objetoA.vel + objetoB.vel;
+                            //direccionBA.Normalize();
+                            if (objetoA.isStatic)
+                            {
+                                objetoB.AplicaFuerza((-direccionBA + -VelocityBA) * 15f, (float)gameTime.ElapsedGameTime.TotalSeconds, true);
+                            }
+                            else if (!objetoB.isStatic)
+                            {
+                                objetoA.AplicaFuerza((direccionBA + VelocityBA) * 30f, (float)gameTime.ElapsedGameTime.TotalSeconds);
+                            }
+                            if (objetoB.isStatic)
+                            {
+                                objetoA.AplicaFuerza((direccionBA + -VelocityBA) * 15f, (float)gameTime.ElapsedGameTime.TotalSeconds, true);
+                            }
+                            else if (!objetoA.isStatic)
+                            {
+                                objetoB.AplicaFuerza((-direccionBA + VelocityBA) * 30f, (float)gameTime.ElapsedGameTime.TotalSeconds);
+                            }
                         }
                     }
                 }

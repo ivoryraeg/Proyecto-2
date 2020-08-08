@@ -14,9 +14,9 @@ namespace UTalDrawSystem.SistemaGameObject
         public ObjetoFisico objetoFisico;
         Dibujable dibujable;
         public enum FF_form { Circulo, Rectangulo};
-        public UTGameObject(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false)
+        public UTGameObject(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false, bool isSuperior = false)
         {
-            dibujable = new Dibujable(imagen, pos, escala);
+            dibujable = new Dibujable(imagen, pos, escala, isSuperior);
             objetoFisico = new ObjetoFisico(dibujable);
             if (forma == FF_form.Circulo)
             {

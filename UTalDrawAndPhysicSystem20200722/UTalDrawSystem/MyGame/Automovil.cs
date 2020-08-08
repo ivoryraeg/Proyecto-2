@@ -4,17 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using UTalDrawSystem.SistemaGameObject;
 
 namespace UTalDrawSystem.MyGame
 {
-    class Automovil : UTGameObject
+    public class Automovil : UTGameObject
     {
+        UTGameObject shield;
+
+        public int vidas;
         public int puntaje = 0;
 
-        public Automovil(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false) : base(imagen, pos, escala, forma, isStatic)
+        public bool invulnerable;
+        public float tiempoInvulnerable;
+
+        Vector2 respawnPos;
+
+        public Automovil(ContentManager content, string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false, bool isSuperior = true) : base(imagen, pos, escala, forma, isStatic, isSuperior)
         {
+            vidas = 5;
+            respawnPos = pos;
+
+            invulnerable = false;
+            tiempoInvulnerable = 0;
         }
         public override void Update(GameTime gameTime)
         {
@@ -71,17 +86,28 @@ namespace UTalDrawSystem.MyGame
                 objetoFisico.dibujable.rot = -1.57f / 2f - 1.57f;
             }
 
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            if (invulnerable)
             {
-                Destroy();
-            }
+                shield.objetoFisico.pos = objetoFisico.pos;
 
+                if (tiempoInvulnerable > 3)
+                {
+                    shield.Destroy();
+                    tiempoInvulnerable = 0;
+                    invulnerable = false;
+                    objetoFisico.isTrigger = false;
+                }
+                else
+                {
+                    tiempoInvulnerable += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+            }
         }
+
         public override void OnCollision(UTGameObject other)
         {
-            Coleccionable col = other as Coleccionable;            
+            Coleccionable col = other as Coleccionable; 
+            Agujero obs = other as Agujero;
 
             if (col != null)
             {
@@ -90,6 +116,27 @@ namespace UTalDrawSystem.MyGame
 
                 //Console.WriteLine(puntaje);
             }
+            if (obs != null)
+            {
+                if (!invulnerable)
+                {
+                    invulnerable = true;
+                    objetoFisico.pos = Respawn();
+                }
+            }
+        }
+
+        public Vector2 Respawn()
+        {
+            vidas--;
+            respawnPos.X = Game1.INSTANCE.ventanaJuego.camara.pos.X + Game1.INSTANCE.GraphicsDevice.Viewport.Width/2f;
+            respawnPos.Y = Game1.INSTANCE.ventanaJuego.camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height;
+
+            objetoFisico.isTrigger = true;
+            shield = new UTGameObject("energyShield", objetoFisico.pos, 0.2f, FF_form.Circulo, false, true);
+            shield.objetoFisico.isTrigger = true;
+
+            return respawnPos;
         }
     }
 }
